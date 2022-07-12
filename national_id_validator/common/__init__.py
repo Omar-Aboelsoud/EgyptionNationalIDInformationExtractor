@@ -1,0 +1,1 @@
+from .egyptian_governorate_code_enum import GOVERNORATES

@@ -1,0 +1,5 @@
+__pycache__/
+.coverage.*
+db.sqlite3
+__pypackages__/
+my_env/
