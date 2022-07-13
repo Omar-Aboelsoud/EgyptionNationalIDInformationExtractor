@@ -16,26 +16,27 @@ class TestNIDValidator(TestCase):
         Test get_national_id_information get the correct info from ID number
         """
         # Given
-        service_national_id = NIDService(nid=self.nid_number)
+        nid_service = NIDService()
         # When
-        extracted_data = service_national_id.get_national_id_information()
+        extracted_data = nid_service.get_national_id_information(
+            nid=self.nid_number)
         # Then
-        self.assertEqual(str(extracted_data.get("birthdate")),
+        self.assertEqual(str(extracted_data.__dict__.get("birthdate")),
                          "1992-03-02")
-        self.assertEqual(extracted_data.get("governorate"), "Fayoum")
-        self.assertEqual(extracted_data.get("gender"), "female")
+        self.assertEqual(extracted_data.__dict__.get("governorate"), "Fayoum")
+        self.assertEqual(extracted_data.__dict__.get("gender"), "female")
 
     def test_get_gender(self):
         """
         Test get_gender that returns the gender based on the index 12 if it is even number then it is female
         """
         # Given
-        service_national_id_female = NIDService(nid=self.nid_number)
+        nid_service = NIDService()
         nid_number_male = self.nid_number.replace("4", "5")
-        service_national_id_male = NIDService(nid=nid_number_male)
         # When
-        gender_female = service_national_id_female.get_gender()
-        gender_male = service_national_id_male.get_gender()
+        gender_female = nid_service._NIDService__get_gender(
+            nid=self.nid_number)
+        gender_male = nid_service._NIDService__get_gender(nid=nid_number_male)
         # Then
         self.assertEqual(gender_female, "female")
         self.assertEqual(gender_male, "male")

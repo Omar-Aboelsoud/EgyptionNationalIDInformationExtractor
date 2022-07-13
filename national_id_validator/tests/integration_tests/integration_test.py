@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.urls import reverse
 from rest_framework import status
 
 
@@ -8,7 +7,7 @@ class TestNationalIdViewSet(TestCase):
         pass
 
     def setUp(self):
-        self.url = reverse('validate_national_id-list')
+        self.url = "/nid/data/"
 
     def test_success_input(self):
         """
